@@ -1,0 +1,11 @@
+const globleErorrHandlineMidleware=(error,req,res,next)=>{
+    console.log(error);
+    if (error.name=="NotFoundError") {
+        return res.status(404).json({message:Error.message}).send()
+        
+    }else{
+        return res.status(500).json({message:"Internal Server Error"}).send()
+    }
+
+}
+export default globleErorrHandlineMidleware;

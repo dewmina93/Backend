@@ -51,30 +51,74 @@ const products=[
         description:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo explicabo, est nobis sequi tempore numquam."},
 ]
 
-export const getProduct=(req, res)=>res.status(200).json(products).send()
-
-export const createProduct=(req, res)=>{
+export const getProduct=(req, res,next)=>{
+    try {
+        return res.status(200).json(products).send()}
+     catch (error) {
+        next(error)
+    }
     
-    products.push(req.body)
-    res.status(201).send()
+}
+export const createProduct=(req, res,next)=>{
+
+    try {
+        products.push(req.body)
+    return res.status(201).json(products).send()
+
+    } catch (error) {
+        next(error)
+    }
+    
 }
 
-export const getProducts=(req, res)=>{
-    const id =req.params.id;
+export const getProducts=(req, res,next)=>{
+    try {
+        const id =req.params.id;
     const product=products.find((pro)=>pro.id==id)
-    res.status(200).json(product).send()
+
+    if (! product) {
+        return res.status(404). json({ message: "Product not found" }).send()
+    }
+    return res.status(200).json(product).send()
+
+    } catch (error) {
+        next(error)
+    }
+    
 }
 
-export const deleteProduct=(req,res)=>{
-    const id=req.params.id;
+export const deleteProduct=(req,res,next)=>{
+    try {
+        const id=req.params.id;
     const index=products.findIndex((pro)=>pro.id==id)
     products.splice(index,1)
-    res.status(200).json(products).send()
+
+    if (index===-1) {
+        return res.status(404).json({ message: "Product not found" }).send()
+        
+    }
+    return res.status(200).json(products).send()
+
+    } catch (error) {
+        next(error)
+    }
+    
 }
 
-export const updateProduct=(req,res)=>{
-    const id=req.params.id;
+export const updateProduct=(req,res,next)=>{
+    try {
+        const id=req.params.id;
     const index=products.findIndex((pro)=>pro.id==id)
     products[index]=req.body
-    res.status(200).json(products).send()
+
+    if (index=== -1) {
+        return res.status(404).json({ message: "Product not found" }).send()
+        
+    }
+    return res.status(200).json(products).send()
+
+    } catch (error) {
+        next(error)
+    }
+    
 }
