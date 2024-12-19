@@ -16,6 +16,7 @@ const products=[
         description:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo explicabo, est nobis sequi tempore numquam."},
 
     {id:3,
+
         categoryId:3,
         name:"Echo dot",
         price:80,
@@ -61,7 +62,13 @@ const products=[
 
 export const getProduct= async(req, res,next)=>{
     try {
-        const data=await Product.find()
+        const {categoryId}=req.query;
+        if (!categoryId) 
+            {
+                const data=await Product.find()
+                return res.status(200).json(data).send()}
+        
+        const data=await Product.find({categoryId})
         return res.status(200).json(data).send()}
      catch (error) {
         next(error)
