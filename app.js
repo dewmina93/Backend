@@ -2,7 +2,7 @@ import express from 'express';
 import {connectDB} from '../Backend/src/infastructure/schemas/db.js';
 import {productRouter} from './src/Routes/product.js';
 import { categoryRouter } from './src/Routes/category.js';
-
+import 'dotenv/config.js'
 
 const app = express();
 

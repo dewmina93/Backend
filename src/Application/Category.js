@@ -1,5 +1,8 @@
+import Category from '../infastructure/schemas/category.js';
+
 export const getCategory= async(req, res,next)=>{
     try {
+        
         const data=await Category.find()
         return res.status(200).json(data).send()}
      catch (error) {
@@ -56,9 +59,9 @@ export const deleteCategory=async(req,res,next)=>{
 export const updateCategory=async(req,res,next)=>{
     try {
         const id=req.params.id;
-    const product=await Category.findByIdAndUpdate(id,req.body)
+    const category=await Category.findByIdAndUpdate(id,req.body)
 
-    if (!product) {
+    if (!category) {
         return res.status(404).json({ message: "Product not found" }).send()
         
     }
