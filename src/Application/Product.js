@@ -16,6 +16,7 @@ const products=[
         description:"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo explicabo, est nobis sequi tempore numquam."},
 
     {id:3,
+        
         categoryId:3,
         name:"Echo dot",
         price:80,
